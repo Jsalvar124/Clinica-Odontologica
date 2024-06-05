@@ -58,7 +58,7 @@ public class Turno {
 
     @Override
     public String toString() {
-        return "Turno" +
+        return "Turno " +
                 "id=" + id +
                 ", paciente=" + paciente +
                 ", odontologo=" + odontologo +
