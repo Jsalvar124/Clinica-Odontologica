@@ -1,39 +1,35 @@
 package dh.backend.clinicamvc.controller;
 
-import dh.backend.clinicamvc.model.Paciente;
-import dh.backend.clinicamvc.service.IPacienteService;
+import dh.backend.clinicamvc.entity.Paciente;
+import dh.backend.clinicamvc.service.impl.PacienteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/paciente")
 public class PacienteController {
-    public IPacienteService pacienteService;
-
-    public PacienteController(IPacienteService pacienteService) {
+    private PacienteService pacienteService;
+    public PacienteController(PacienteService pacienteService) {
         this.pacienteService = pacienteService;
     }
 
     @PostMapping
     public ResponseEntity<Paciente> registrarPaciente (@RequestBody Paciente paciente){
-        Paciente pacienteARetornar = pacienteService.registrarPaciente(paciente);
-        if (pacienteARetornar == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }else {
-            return ResponseEntity.status(HttpStatus.CREATED).body(pacienteARetornar);
-        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(pacienteService.registrarPaciente(paciente));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Paciente> buscarPorId (@PathVariable Integer id){
-        Paciente paciente = pacienteService.buscarPorId(id);
-        if (paciente != null) {
-            return ResponseEntity.ok(paciente);
+        Optional<Paciente> paciente = pacienteService.buscarPorId(id);
+        if (paciente.isPresent()) {
+            Paciente pacienteARetornar = paciente.get();
+            return ResponseEntity.ok(pacienteARetornar);
         }else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
     }
 
@@ -44,14 +40,24 @@ public class PacienteController {
 
     @PutMapping
     public ResponseEntity<String> actualizarPaciente(@RequestBody Paciente paciente){
-        pacienteService.actualizarPaciente(paciente);
-        return ResponseEntity.ok("¡ paciente actualizado con exito !");
+        Optional<Paciente> optionalPaciente = pacienteService.buscarPorId(paciente.getId());
+        if (optionalPaciente.isPresent()) {
+            pacienteService.actualizarPaciente(paciente);
+            return ResponseEntity.ok("{\"message\": \"paciente actualizado\"}");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\": \"paciente no encontrado\"}");
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarPaciente(@PathVariable Integer id){
-        pacienteService.eliminarPaciente(id);
-        return ResponseEntity.ok("¡ Paciente eliminado con exito !");
+        Optional<Paciente> paciente = pacienteService.buscarPorId(id);
+        if (paciente.isPresent()) {
+            pacienteService.eliminarPaciente(id);
+            return ResponseEntity.ok("{\"message\": \"paciente eliminado\"}");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
     }
 
 }

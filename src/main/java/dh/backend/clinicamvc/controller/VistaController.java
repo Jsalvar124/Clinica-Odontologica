@@ -1,7 +1,7 @@
 package dh.backend.clinicamvc.controller;
 
-import dh.backend.clinicamvc.model.Odontologo;
-import dh.backend.clinicamvc.model.Paciente;
+import dh.backend.clinicamvc.entity.Odontologo;
+import dh.backend.clinicamvc.entity.Paciente;
 import dh.backend.clinicamvc.service.IOdontologoService;
 import dh.backend.clinicamvc.service.IPacienteService;
 import org.springframework.stereotype.Controller;
@@ -9,7 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/vista")
@@ -25,7 +26,8 @@ public class VistaController {
 
     @GetMapping("/buscarPaciente")
     public String buscarPacientePorId(Model model, @RequestParam Integer id){
-        Paciente paciente = pacienteService.buscarPorId(id);
+        Optional<Paciente> pacienteOptional = pacienteService.buscarPorId(id);
+        Paciente paciente = pacienteOptional.get();
         model.addAttribute("especialidad", "Hola Paciente: ");
         model.addAttribute("nombre", paciente.getNombre());
         model.addAttribute("apellido", paciente.getApellido());
@@ -34,7 +36,8 @@ public class VistaController {
 
     @GetMapping("/buscarOdontologo")
     public String buscarOdontologoPorId(Model model, @RequestParam Integer id){
-        Odontologo odontologo = odontologoService.buscarPorId(id);
+        Optional<Odontologo> odontologoOptional = odontologoService.buscarPorId(id);
+        Odontologo odontologo = odontologoOptional.get();
         model.addAttribute("especialidad", "Hola Odontologo: ");
         model.addAttribute("nombre", odontologo.getNombre());
         model.addAttribute("apellido", odontologo.getApellido());
