@@ -26,7 +26,11 @@ public class OdontologoService implements IOdontologoService {
     }
 
     @Override
-    public Optional<Odontologo> buscarPorId(Integer id) {
-        return odontologoRepository.findById();
+    public void actualizarOdontologo(Odontologo odontologo) { odontologoRepository.save(odontologo);}
+    @Override
+    public void eliminarOdontologo(Integer id) { odontologoRepository.deleteById(id);}
+    @Override
+    public Optional<Odontologo> buscarOdontologoPorId(Integer id) {
+        return odontologoRepository.findById(id);
     }
 }

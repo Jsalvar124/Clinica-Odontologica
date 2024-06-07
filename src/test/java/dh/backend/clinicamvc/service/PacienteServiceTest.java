@@ -57,7 +57,7 @@ class PacienteServiceTest {
     @DisplayName("Testear busqueda todos los pacientes")
     void testBusquedaTodos() {
 
-        List<Paciente> pacientes = pacienteService.buscarTodos();
+        List<Paciente> pacientes = pacienteService.buscarTodosPacientes();
 
         assertTrue(pacientes.size()!=0);
 

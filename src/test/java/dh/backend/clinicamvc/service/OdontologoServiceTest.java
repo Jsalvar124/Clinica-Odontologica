@@ -1,6 +1,5 @@
 package dh.backend.clinicamvc.service;
 
-import dh.backend.clinicamvc.dao.impl.OdontologoDaoH2;
 import dh.backend.clinicamvc.entity.Odontologo;
 import dh.backend.clinicamvc.service.impl.OdontologoService;
 import org.junit.jupiter.api.BeforeAll;
@@ -13,13 +12,16 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class OdontologoServiceTest {
 
     private static Logger LOGGER = LoggerFactory.getLogger(OdontologoServiceTest.class);
-    private static OdontologoService odontologoService = new OdontologoService(new OdontologoDaoH2());
+    private OdontologoService odontologoService;
+
+    private Odontologo odontologo;
 
     @BeforeAll
     static void crearTablas(){
@@ -51,9 +53,9 @@ class OdontologoServiceTest {
     @DisplayName("Testear busqueda odontologo por id")
     void testOdontologoPorId(){
         Integer id = 1;
-        Odontologo odontologoEncontrado = odontologoService.buscarPorId(id);
+        Optional<Odontologo> odontologoEncontrado = odontologoService.buscarOdontologoPorId(id);
 
-        assertEquals(id, odontologoEncontrado.getId());
+        assertEquals(id, odontologoEncontrado.get());
     }
 
 }

@@ -36,7 +36,7 @@ public class VistaController {
 
     @GetMapping("/buscarOdontologo")
     public String buscarOdontologoPorId(Model model, @RequestParam Integer id){
-        Optional<Odontologo> odontologoOptional = odontologoService.buscarPorId(id);
+        Optional<Odontologo> odontologoOptional = odontologoService.buscarOdontologoPorId(id);
         Odontologo odontologo = odontologoOptional.get();
         model.addAttribute("especialidad", "Hola Odontologo: ");
         model.addAttribute("nombre", odontologo.getNombre());
