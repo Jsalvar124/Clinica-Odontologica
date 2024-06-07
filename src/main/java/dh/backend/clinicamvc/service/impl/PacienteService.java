@@ -21,11 +21,13 @@ public class PacienteService implements IPacienteService {
         return pacienteRepository.save(paciente);
     }
 
-    public Optional<Paciente> buscarPorId(Integer id){
+    @Override
+    public Optional<Paciente> buscarPacientePorId(Integer id) {
         return pacienteRepository.findById(id);
     }
 
-    public List<Paciente> buscarTodos(){
+    @Override
+    public List<Paciente> buscarTodosPacientes() {
         return pacienteRepository.findAll();
     }
 

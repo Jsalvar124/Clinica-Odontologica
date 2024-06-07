@@ -24,7 +24,7 @@ public class PacienteController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Paciente> buscarPorId (@PathVariable Integer id){
-        Optional<Paciente> paciente = pacienteService.buscarPorId(id);
+        Optional<Paciente> paciente = pacienteService.buscarPacientePorId(id);
         if (paciente.isPresent()) {
             Paciente pacienteARetornar = paciente.get();
             return ResponseEntity.ok(pacienteARetornar);
@@ -35,12 +35,12 @@ public class PacienteController {
 
     @GetMapping
     public ResponseEntity<List<Paciente>> listarTodos(){
-        return ResponseEntity.ok(pacienteService.buscarTodos());
+        return ResponseEntity.ok(pacienteService.buscarTodosPacientes());
     }
 
     @PutMapping
     public ResponseEntity<String> actualizarPaciente(@RequestBody Paciente paciente){
-        Optional<Paciente> optionalPaciente = pacienteService.buscarPorId(paciente.getId());
+        Optional<Paciente> optionalPaciente = pacienteService.buscarPacientePorId(paciente.getId());
         if (optionalPaciente.isPresent()) {
             pacienteService.actualizarPaciente(paciente);
             return ResponseEntity.ok("{\"message\": \"paciente actualizado\"}");
@@ -51,7 +51,7 @@ public class PacienteController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> eliminarPaciente(@PathVariable Integer id){
-        Optional<Paciente> paciente = pacienteService.buscarPorId(id);
+        Optional<Paciente> paciente = pacienteService.buscarPacientePorId(id);
         if (paciente.isPresent()) {
             pacienteService.eliminarPaciente(id);
             return ResponseEntity.ok("{\"message\": \"paciente eliminado\"}");

@@ -9,9 +9,9 @@ public interface IPacienteService {
 
     Paciente registrarPaciente(Paciente paciente);
 
-    Optional<Paciente> buscarPorId(Integer id);
+    Optional<Paciente> buscarPacientePorId(Integer id);
 
-    List<Paciente> buscarTodos();
+    List<Paciente> buscarTodosPacientes();
 
     void actualizarPaciente(Paciente paciente);
     void eliminarPaciente(Integer id);

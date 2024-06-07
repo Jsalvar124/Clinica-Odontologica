@@ -47,7 +47,7 @@ class PacienteServiceTest {
     @DisplayName("Testear busqueda paciente por id")
     void testPacientePorId(){
         Integer id = 1;
-        Optional<Paciente> pacienteEncontrado = pacienteService.buscarPorId(id);
+        Optional<Paciente> pacienteEncontrado = pacienteService.buscarPacientePorId(id);
         Paciente paciente1 = pacienteEncontrado.get();
 
         assertEquals(id, paciente1.getId());
