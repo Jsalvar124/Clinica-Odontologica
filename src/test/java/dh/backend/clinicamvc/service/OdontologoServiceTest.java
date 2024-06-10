@@ -1,21 +1,21 @@
 package dh.backend.clinicamvc.service;
 
+
 import dh.backend.clinicamvc.entity.Odontologo;
 import dh.backend.clinicamvc.service.impl.OdontologoService;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.boot.test.context.SpringBootTest;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+@SpringBootTest
 class OdontologoServiceTest {
 
     private static Logger LOGGER = LoggerFactory.getLogger(OdontologoServiceTest.class);
@@ -23,30 +23,27 @@ class OdontologoServiceTest {
 
     private Odontologo odontologo;
 
-    @BeforeAll
-    static void crearTablas(){
-        Connection connection = null;
-        try {
-            Class.forName("org.h2.Driver");
-            connection = DriverManager.getConnection("jdbc:h2:~/clinicaMVC2805;INIT=RUNSCRIPT FROM 'create.sql'", "sa", "sa");
-        } catch (Exception e) {
-            e.printStackTrace();
-            LOGGER.error(e.getMessage());
-        } finally {
-            try {
-                connection.close();
-            } catch (SQLException e) {
-                LOGGER.error(e.getMessage());
-            }
-        }
+    @BeforeEach
+    void setUp(){
+        odontologo = new Odontologo();
+        odontologo.setNombre("Menganito");
+        odontologo.setApellido("Cosme");
+        odontologo.setMatricula("143");
     }
 
+    @Test
+    @DisplayName("Testear que el odontólogo fue guardado")
+    void registerTest(){
+        Odontologo odontologoEnBD = odontologoService.registrarOdontologo(odontologo);
+
+        assertNotNull(odontologoEnBD);
+    }
     @Test
     @DisplayName("Testeo mostrar lista de odontologos")
     void test1(){
         List<Odontologo> listaOdontologos = odontologoService.listarOdontologos();
 
-        assertEquals(2, listaOdontologos.size());
+        assertEquals(1, listaOdontologos.size());
     }
 
     @Test

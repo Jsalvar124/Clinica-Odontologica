@@ -4,6 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,4 +23,7 @@ public class Odontologo {
     private String nombre;
     private String apellido;
     private String matricula;
+
+    @OneToMany(mappedBy = "odontologo",cascade = CascadeType.ALL) // Hace alusión al atributo en Turno, Si se borra un odontólogo, se borran los turnos relacionados.
+    private Set<Turno> turnoSet = new HashSet<>();
 }
