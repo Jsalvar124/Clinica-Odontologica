@@ -11,16 +11,18 @@ import java.util.Optional;
 
 @Service
 public class OdontologoService implements IOdontologoService {
+    // JPA
     private IOdontologoRepository odontologoRepository;
 
+    // CONSTRUCTOR
     public OdontologoService(IOdontologoRepository odontologoRepository) {
         this.odontologoRepository = odontologoRepository;
     }
-
+    @Override
     public Odontologo registrarOdontologo(Odontologo odontologo){
         return odontologoRepository.save(odontologo);
     }
-
+    @Override
     public List<Odontologo> listarOdontologos(){
         return odontologoRepository.findAll();
     }

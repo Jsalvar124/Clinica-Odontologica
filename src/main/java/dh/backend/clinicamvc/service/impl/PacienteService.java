@@ -11,12 +11,12 @@ import java.util.Optional;
 @Service
 public class PacienteService implements IPacienteService {
     private IPacienteRepository pacienteRepository;
-
+    // CONSTRUCTOR
     public PacienteService(IPacienteRepository pacienteRepository) {
         this.pacienteRepository = pacienteRepository;
     }
 
-
+    @Override
     public Paciente registrarPaciente(Paciente paciente){
         return pacienteRepository.save(paciente);
     }
