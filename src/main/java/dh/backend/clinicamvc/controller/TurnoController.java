@@ -43,7 +43,7 @@ public class TurnoController {
         return ResponseEntity.ok(turnoService.buscarTodos());
     }
 
-    @PutMapping
+    @PutMapping("/{id}")
     public ResponseEntity<String> modificarTurno(@PathVariable Integer id, @RequestBody TurnoRequestDto turno){
         turnoService.actualizarTurno(id, turno);
         return ResponseEntity.ok("Turno modificado con Exito");

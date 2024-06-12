@@ -1,5 +1,6 @@
 package dh.backend.clinicamvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,5 +30,6 @@ public class Paciente {
     private Domicilio domicilio;
 
     @OneToMany(mappedBy = "paciente",cascade = CascadeType.ALL) // Hace alusión al atributo en Turno, Si se borra un paciente, se borran los turnos relacionados.
+    @JsonIgnore
     private Set<Turno> turnoSet = new HashSet<>(); // El set es más rápido y evita duplicados, un pacietne puede tener varios turnos
 }

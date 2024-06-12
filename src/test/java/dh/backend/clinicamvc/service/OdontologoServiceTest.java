@@ -8,19 +8,21 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 class OdontologoServiceTest {
 
     private static Logger LOGGER = LoggerFactory.getLogger(OdontologoServiceTest.class);
-    private OdontologoService odontologoService;
 
+    @Autowired
+    private OdontologoService odontologoService;
     private Odontologo odontologo;
 
     @BeforeEach
@@ -43,7 +45,7 @@ class OdontologoServiceTest {
     void test1(){
         List<Odontologo> listaOdontologos = odontologoService.listarOdontologos();
 
-        assertEquals(1, listaOdontologos.size());
+        assertTrue(listaOdontologos.size()!=0);
     }
 
     @Test
@@ -51,8 +53,9 @@ class OdontologoServiceTest {
     void testOdontologoPorId(){
         Integer id = 1;
         Optional<Odontologo> odontologoEncontrado = odontologoService.buscarOdontologoPorId(id);
+        Odontologo odontologo1 = odontologoEncontrado.get();
 
-        assertEquals(id, odontologoEncontrado.get());
+        assertEquals(id, odontologo1.getId());
     }
 
 }

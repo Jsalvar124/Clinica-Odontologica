@@ -1,5 +1,6 @@
 package dh.backend.clinicamvc.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -25,5 +26,6 @@ public class Odontologo {
     private String matricula;
 
     @OneToMany(mappedBy = "odontologo",cascade = CascadeType.ALL) // Hace alusión al atributo en Turno, Si se borra un odontólogo, se borran los turnos relacionados.
+    @JsonIgnore
     private Set<Turno> turnoSet = new HashSet<>();
 }

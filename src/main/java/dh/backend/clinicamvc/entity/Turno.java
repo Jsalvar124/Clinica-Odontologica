@@ -20,11 +20,9 @@ public class Turno {
     Integer id;
 
     @ManyToOne // Muchos turnos pueden corresponderle a un paciente.
-    @JsonIgnore
     Paciente paciente;
 
     @ManyToOne //Muchos turnos pueden corresponderle a un odontólogo.
-    @JsonIgnore
     Odontologo odontologo;
     LocalDate fecha;
 }
