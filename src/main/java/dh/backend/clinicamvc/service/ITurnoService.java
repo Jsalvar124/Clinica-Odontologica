@@ -4,6 +4,7 @@ import dh.backend.clinicamvc.dto.request.TurnoRequestDto;
 import dh.backend.clinicamvc.dto.response.TurnoResponseDto;
 import dh.backend.clinicamvc.entity.Turno;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface ITurnoService {
@@ -16,5 +17,8 @@ public interface ITurnoService {
     void actualizarTurno(Integer id, TurnoRequestDto turnoRequestDto);
 
     void eliminarTurno(Integer id);
+
+    // HQL
+    List<TurnoResponseDto> buscarTurnoEntreFechas(LocalDate startDate, LocalDate endDate);
 
 }
