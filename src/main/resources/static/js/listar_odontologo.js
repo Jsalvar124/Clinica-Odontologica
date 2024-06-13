@@ -33,7 +33,28 @@ function fetchOdontologos() {
 
     // modificar un odontologo
 
-    // eliminar un odontologo
+
+
 }
+
+// eliminar un odontologo
+function deleteOdontologo(id) {
+    fetch(`/odontologo/${id}`, {
+        method: "DELETE",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            alert("Odontólogo eliminado con éxito");
+            fetchOdontologos(); // Refrescar la lista de odontólogos
+        })
+        .catch((error) => {
+            console.error("Error eliminando odontólogo:", error);
+        });
+}
+
 
 fetchOdontologos();

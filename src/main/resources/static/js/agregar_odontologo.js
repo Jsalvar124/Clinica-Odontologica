@@ -14,7 +14,7 @@ form.addEventListener("submit", function (event) {
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({nombre, apellido, Nromatricula: matricula}),
+        body: JSON.stringify({nombre, apellido, matricula}),
     })
         .then((response) => response.json())
         .then((data) => {
@@ -25,4 +25,5 @@ form.addEventListener("submit", function (event) {
         .catch((error) => {
             console.error("Error agregando odontólogo:", error);
         });
+
 });
