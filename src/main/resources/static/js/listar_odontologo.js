@@ -31,8 +31,6 @@ function fetchOdontologos() {
             console.error("Error fetching data:", error);
         });
 
-    // modificar un odontologo
-
 
 
 }
@@ -54,6 +52,35 @@ function deleteOdontologo(id) {
         .catch((error) => {
             console.error("Error eliminando odontólogo:", error);
         });
+}
+
+
+// modificar un odontologo
+function editOdontologo(id) {
+    const nombre = document.getElementById("nombre").value;
+    const apellido = document.getElementById("apellido").value;
+    const matricula = document.getElementById("matricula").value;
+
+    fetch(`/odontologo`, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({id, nombre, apellido, matricula})
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            alert("Odontólogo Modificado con éxito");
+            fetchOdontologos(); // Refrescar la lista de odontólogos
+        })
+        .catch((error) => {
+            console.error("Error Modificando odontólogo:", error);
+        });
+}
+
+function clearInputs() {
+
 }
 
 

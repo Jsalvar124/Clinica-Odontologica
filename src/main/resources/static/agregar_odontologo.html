@@ -25,12 +25,15 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Pacientes</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" href="#">Turnos</a>
         </li>
-
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pacientes</a>
+          <div class="dropdown-menu">
+            <a class="dropdown-item" href="agregar_paciente.html">Agregar paciente</a>
+            <a class="dropdown-item" href="listar_paciente.html">Listar paciente</a>
+          </div>
+        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Odontologos</a>
           <div class="dropdown-menu">
@@ -48,18 +51,18 @@
   <h1 class="mt-5">Agregar Odontólogo</h1>
   <form id="agregarForm">
     <div class="mb-3">
-        <label class="form-label mt-4" >Nombre</label>
-        <input class="form-control" id="nombre" type="text" placeholder="Ingrese nombre" >
+      <label class="form-label mt-4" >Nombre</label>
+      <input class="form-control" id="nombre" type="text" placeholder="Ingrese nombre" >
     </div>
     <div class="mb-3">
-        <label class="form-label mt-4" >Apellido</label>
-        <input class="form-control" id="apellido" type="text" placeholder="Ingrese apellido" >
+      <label class="form-label mt-4" >Apellido</label>
+      <input class="form-control" id="apellido" type="text" placeholder="Ingrese apellido" >
     </div>
     <div class="mb-3">
-        <label class="form-label mt-4">Matricula</label>
-        <input class="form-control" id="matricula" type="text" placeholder="Ingrese matricula" >
+      <label class="form-label mt-4">Matricula</label>
+      <input class="form-control" id="matricula" type="text" placeholder="Ingrese matricula" >
     </div>
-      <button class="btn btn-secondary" type="submit" id="btn-agregar">Agregar Odontologo</button>
+    <button class="btn btn-secondary" type="submit" id="btn-agregar">Agregar Odontologo</button>
   </form>
 </div>
 
