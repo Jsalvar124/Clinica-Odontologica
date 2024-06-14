@@ -1,7 +1,7 @@
 const tableBody = document.querySelector("#odontologosTable tbody");
 function fetchOdontologos() {
-    // listando los odontologos
 
+    // listando los odontologos
     fetch(`/odontologo`)
         .then((response) => response.json())
         .then((data) => {
@@ -30,9 +30,6 @@ function fetchOdontologos() {
         .catch((error) => {
             console.error("Error fetching data:", error);
         });
-
-
-
 }
 
 // eliminar un odontologo
@@ -73,15 +70,17 @@ function editOdontologo(id) {
             console.log(data);
             alert("Odontólogo Modificado con éxito");
             fetchOdontologos(); // Refrescar la lista de odontólogos
+            clearInputs();
+
         })
         .catch((error) => {
             console.error("Error Modificando odontólogo:", error);
         });
 }
-
 function clearInputs() {
-
+    document.getElementById("nombre").value = "";
+    document.getElementById("apellido").value = "";
+    document.getElementById("matricula").value = "";
 }
-
 
 fetchOdontologos();

@@ -2,6 +2,7 @@ package dh.backend.clinicamvc.controller;
 
 import dh.backend.clinicamvc.dto.request.TurnoRequestDto;
 import dh.backend.clinicamvc.dto.response.TurnoResponseDto;
+import dh.backend.clinicamvc.exception.BadRequestException;
 import dh.backend.clinicamvc.service.ITurnoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,13 +22,9 @@ public class TurnoController {
     }
 
     @PostMapping
-    public ResponseEntity<TurnoResponseDto> agregarTurno(@RequestBody TurnoRequestDto turno){
+    public ResponseEntity<TurnoResponseDto> agregarTurno(@RequestBody TurnoRequestDto turno)throws BadRequestException {
         TurnoResponseDto turnoARetornar = turnoService.registrar(turno);
-        if (turnoARetornar == null) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }else {
             return ResponseEntity.status(HttpStatus.CREATED).body(turnoARetornar);
-        }
     }
 
     @GetMapping("/{id}")

@@ -1,6 +1,7 @@
 package dh.backend.clinicamvc.controller;
 
 import dh.backend.clinicamvc.entity.Odontologo;
+import dh.backend.clinicamvc.exception.ResourceNotFoundException;
 import dh.backend.clinicamvc.service.impl.OdontologoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -56,13 +57,8 @@ public class OdontologoController {
     }
     // Eliminar Odontólogo por Id
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarOdontologo(@PathVariable Integer id){
-        Optional<Odontologo> odontologo = odontologoService.buscarOdontologoPorId(id);
-        if (odontologo.isPresent()) {
+    public ResponseEntity<String> eliminarOdontologo(@PathVariable Integer id) throws ResourceNotFoundException {
             odontologoService.eliminarOdontologo(id);
             return ResponseEntity.ok("{\"message\": \"odontólogo eliminado\"}");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-        }
     }
 }

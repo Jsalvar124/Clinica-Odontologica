@@ -7,6 +7,7 @@ import dh.backend.clinicamvc.dto.response.TurnoResponseDto;
 import dh.backend.clinicamvc.entity.Odontologo;
 import dh.backend.clinicamvc.entity.Paciente;
 import dh.backend.clinicamvc.entity.Turno;
+import dh.backend.clinicamvc.exception.BadRequestException;
 import dh.backend.clinicamvc.repository.IOdontologoRepository;
 import dh.backend.clinicamvc.repository.IPacienteRepository;
 import dh.backend.clinicamvc.repository.ITurnoRepository;
@@ -36,7 +37,7 @@ public class TurnoService  implements ITurnoService {
     }
 
     @Override
-    public TurnoResponseDto registrar(TurnoRequestDto turnoRequestDto) {
+    public TurnoResponseDto registrar(TurnoRequestDto turnoRequestDto) throws BadRequestException {
 
         Optional<Paciente> paciente = pacienteRepository.findById(turnoRequestDto.getPaciente_id());
         Optional<Odontologo> odontologo = odontologoRepository.findById(turnoRequestDto.getOdontologo_id());
@@ -45,7 +46,7 @@ public class TurnoService  implements ITurnoService {
         Turno turnoGuardado = null;
         TurnoResponseDto turnoADevolver = null;
 
-        if(paciente.isPresent() && odontologo.isPresent()){
+        if(paciente.isPresent() && odontologo.isPresent()) {
 
             turnoARegistrar.setOdontologo(odontologo.get());
             turnoARegistrar.setPaciente(paciente.get());
@@ -53,6 +54,8 @@ public class TurnoService  implements ITurnoService {
 
             turnoGuardado = turnoRepository.save(turnoARegistrar);
             turnoADevolver = mapToResponseDto(turnoGuardado);
+        }else{
+            throw new BadRequestException("{\"message\": \"no se pudo crear el turno\"}");
         }
         return turnoADevolver;
     }
