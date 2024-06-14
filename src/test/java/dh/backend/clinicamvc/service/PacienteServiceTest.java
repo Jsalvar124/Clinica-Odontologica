@@ -2,6 +2,7 @@ package dh.backend.clinicamvc.service;
 
 import dh.backend.clinicamvc.entity.Domicilio;
 import dh.backend.clinicamvc.entity.Paciente;
+import dh.backend.clinicamvc.exception.BadRequestException;
 import dh.backend.clinicamvc.service.impl.PacienteService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -39,7 +40,7 @@ class PacienteServiceTest {
     }
     @Test
     @DisplayName("Testear que un paciente fue guardado")
-    void testPacienteGuardado(){
+    void testPacienteGuardado() throws BadRequestException {
         Paciente pacienteDesdeLaBD = pacienteService.registrarPaciente(paciente);
 
         assertNotNull(pacienteDesdeLaBD);
@@ -47,12 +48,12 @@ class PacienteServiceTest {
 
     @Test
     @DisplayName("Testear busqueda paciente por id")
-    void testPacientePorId(){
-        Integer id = 1;
-        Optional<Paciente> pacienteEncontrado = pacienteService.buscarPacientePorId(id);
-        Paciente paciente1 = pacienteEncontrado.get();
+    void testPacientePorId() throws BadRequestException {
+      Integer id = 1;
+      Optional<Paciente> pacienteEncontrado = pacienteService.buscarPacientePorId(id);
+      Paciente paciente1 = pacienteEncontrado.get();
 
-        assertEquals(id, paciente1.getId());
+      assertEquals(id, paciente1.getId());
     }
 
     @Test

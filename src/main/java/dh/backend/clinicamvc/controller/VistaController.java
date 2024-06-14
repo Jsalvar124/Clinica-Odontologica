@@ -2,6 +2,7 @@ package dh.backend.clinicamvc.controller;
 
 import dh.backend.clinicamvc.entity.Odontologo;
 import dh.backend.clinicamvc.entity.Paciente;
+import dh.backend.clinicamvc.exception.BadRequestException;
 import dh.backend.clinicamvc.service.IOdontologoService;
 import dh.backend.clinicamvc.service.IPacienteService;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ public class VistaController {
     }
 
     @GetMapping("/buscarPaciente")
-    public String buscarPacientePorId(Model model, @RequestParam Integer id){
+    public String buscarPacientePorId(Model model, @RequestParam Integer id) throws BadRequestException {
         Optional<Paciente> pacienteOptional = pacienteService.buscarPacientePorId(id);
         Paciente paciente = pacienteOptional.get();
         model.addAttribute("especialidad", "Hola Paciente: ");

@@ -51,7 +51,7 @@ class OdontologoServiceTest {
     @Test
     @DisplayName("Testear busqueda odontologo por id")
     void testOdontologoPorId(){
-        Integer id = 1;
+        Integer id = 3;
         Optional<Odontologo> odontologoEncontrado = odontologoService.buscarOdontologoPorId(id);
         Odontologo odontologo1 = odontologoEncontrado.get();
 

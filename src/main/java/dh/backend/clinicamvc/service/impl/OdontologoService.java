@@ -37,6 +37,12 @@ public class OdontologoService implements IOdontologoService {
             odontologoRepository.deleteById(id);
         else throw new ResourceNotFoundException("{\"message\": \"odontologo no encontrado\"}");
     }
+
+    @Override
+    public List<Odontologo> buscarPorApellido(String apellido) {
+        return odontologoRepository.buscarPorApellido(apellido);
+    }
+
     @Override
     public Optional<Odontologo> buscarOdontologoPorId(Integer id) {
         return odontologoRepository.findById(id);

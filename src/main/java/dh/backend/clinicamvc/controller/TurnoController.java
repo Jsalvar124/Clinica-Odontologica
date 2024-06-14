@@ -3,6 +3,7 @@ package dh.backend.clinicamvc.controller;
 import dh.backend.clinicamvc.dto.request.TurnoRequestDto;
 import dh.backend.clinicamvc.dto.response.TurnoResponseDto;
 import dh.backend.clinicamvc.exception.BadRequestException;
+import dh.backend.clinicamvc.exception.ResourceNotFoundException;
 import dh.backend.clinicamvc.service.ITurnoService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,7 +23,7 @@ public class TurnoController {
     }
 
     @PostMapping
-    public ResponseEntity<TurnoResponseDto> agregarTurno(@RequestBody TurnoRequestDto turno)throws BadRequestException {
+    public ResponseEntity<TurnoResponseDto> agregarTurno(@RequestBody TurnoRequestDto turno) throws BadRequestException {
         TurnoResponseDto turnoARetornar = turnoService.registrar(turno);
             return ResponseEntity.status(HttpStatus.CREATED).body(turnoARetornar);
     }
@@ -49,7 +50,7 @@ public class TurnoController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarTurno(@PathVariable Integer id){
+    public ResponseEntity<String> eliminarTurno(@PathVariable Integer id) throws ResourceNotFoundException {
         turnoService.eliminarTurno(id);
         return ResponseEntity.ok("¡ Turno eliminado con exito !");
     }

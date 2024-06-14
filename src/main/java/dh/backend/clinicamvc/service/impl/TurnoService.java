@@ -8,6 +8,7 @@ import dh.backend.clinicamvc.entity.Odontologo;
 import dh.backend.clinicamvc.entity.Paciente;
 import dh.backend.clinicamvc.entity.Turno;
 import dh.backend.clinicamvc.exception.BadRequestException;
+import dh.backend.clinicamvc.exception.ResourceNotFoundException;
 import dh.backend.clinicamvc.repository.IOdontologoRepository;
 import dh.backend.clinicamvc.repository.IPacienteRepository;
 import dh.backend.clinicamvc.repository.ITurnoRepository;
@@ -100,8 +101,12 @@ public class TurnoService  implements ITurnoService {
     }
 
     @Override
-    public void eliminarTurno(Integer id) {
-        turnoRepository.deleteById(id);
+    public void eliminarTurno(Integer id) throws ResourceNotFoundException {
+        Optional<Turno> optionalTurno = turnoRepository.findById(id);
+        if (optionalTurno.isPresent()){
+            turnoRepository.deleteById(id);
+        }else
+            throw new ResourceNotFoundException("{\"message\": \"No se encontro id del turno\"}");
     }
 
     @Override

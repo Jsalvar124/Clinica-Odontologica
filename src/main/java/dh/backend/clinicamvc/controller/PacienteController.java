@@ -1,6 +1,7 @@
 package dh.backend.clinicamvc.controller;
 
 import dh.backend.clinicamvc.entity.Paciente;
+import dh.backend.clinicamvc.exception.BadRequestException;
 import dh.backend.clinicamvc.exception.ResourceNotFoundException;
 import dh.backend.clinicamvc.service.impl.PacienteService;
 import org.springframework.http.HttpStatus;
@@ -19,19 +20,16 @@ public class PacienteController {
     }
 
     @PostMapping
-    public ResponseEntity<Paciente> registrarPaciente (@RequestBody Paciente paciente){
-        return ResponseEntity.status(HttpStatus.CREATED).body(pacienteService.registrarPaciente(paciente));
+    public ResponseEntity<Paciente> registrarPaciente (@RequestBody Paciente paciente) throws BadRequestException {
+        pacienteService.registrarPaciente(paciente);
+        return ResponseEntity.status(HttpStatus.CREATED).body(paciente);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Paciente> buscarPorId (@PathVariable Integer id){
+    public ResponseEntity<Paciente> buscarPorId (@PathVariable Integer id) throws BadRequestException {
         Optional<Paciente> paciente = pacienteService.buscarPacientePorId(id);
-        if (paciente.isPresent()) {
             Paciente pacienteARetornar = paciente.get();
             return ResponseEntity.ok(pacienteARetornar);
-        }else {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
-        }
     }
 
     @GetMapping
@@ -40,18 +38,13 @@ public class PacienteController {
     }
 
     @PutMapping
-    public ResponseEntity<String> actualizarPaciente(@RequestBody Paciente paciente){
-        Optional<Paciente> optionalPaciente = pacienteService.buscarPacientePorId(paciente.getId());
-        if (optionalPaciente.isPresent()) {
+    public ResponseEntity<String> actualizarPaciente(@RequestBody Paciente paciente) throws ResourceNotFoundException {
             pacienteService.actualizarPaciente(paciente);
             return ResponseEntity.ok("{\"message\": \"paciente actualizado\"}");
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("{\"message\": \"paciente no encontrado\"}");
-        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> eliminarPaciente(@PathVariable Integer id) throws ResourceNotFoundException {
+    public ResponseEntity<String> eliminarPaciente(@PathVariable Integer id) throws ResourceNotFoundException, BadRequestException {
             pacienteService.eliminarPaciente(id);
             return ResponseEntity.ok("{\"message\": \"paciente eliminado\"}");
     }
