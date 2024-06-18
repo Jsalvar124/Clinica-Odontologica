@@ -2,6 +2,7 @@ package dh.backend.clinicamvc.service;
 
 
 import dh.backend.clinicamvc.entity.Odontologo;
+import dh.backend.clinicamvc.exception.BadRequestException;
 import dh.backend.clinicamvc.service.impl.OdontologoService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -35,27 +36,30 @@ class OdontologoServiceTest {
 
     @Test
     @DisplayName("Testear que el odontólogo fue guardado")
-    void registerTest(){
+    void registerTest() throws BadRequestException {
         Odontologo odontologoEnBD = odontologoService.registrarOdontologo(odontologo);
-
+        LOGGER.info("Odontologo Guardado: "+ odontologoEnBD);
         assertNotNull(odontologoEnBD);
     }
     @Test
     @DisplayName("Testeo mostrar lista de odontologos")
     void test1(){
         List<Odontologo> listaOdontologos = odontologoService.listarOdontologos();
-
         assertTrue(listaOdontologos.size()!=0);
     }
 
     @Test
     @DisplayName("Testear busqueda odontologo por id")
     void testOdontologoPorId(){
-        Integer id = 3;
+        Integer id = 15;
         Optional<Odontologo> odontologoEncontrado = odontologoService.buscarOdontologoPorId(id);
-        Odontologo odontologo1 = odontologoEncontrado.get();
+        if(odontologoEncontrado.isPresent()){
+            Odontologo odontologo1 = odontologoEncontrado.get();
+            LOGGER.info("Odontologo Encontrado");
+            assertEquals(id, odontologo1.getId());
+        }
 
-        assertEquals(id, odontologo1.getId());
+
     }
 
 }

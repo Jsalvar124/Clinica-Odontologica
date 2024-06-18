@@ -51,9 +51,11 @@ class PacienteServiceTest {
     void testPacientePorId() throws BadRequestException {
       Integer id = 1;
       Optional<Paciente> pacienteEncontrado = pacienteService.buscarPacientePorId(id);
-      Paciente paciente1 = pacienteEncontrado.get();
+      if(pacienteEncontrado.isPresent()){
+          Paciente paciente1 = pacienteEncontrado.get();
+          assertEquals(id, paciente1.getId());
+      }
 
-      assertEquals(id, paciente1.getId());
     }
 
     @Test

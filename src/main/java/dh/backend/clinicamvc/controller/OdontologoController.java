@@ -1,6 +1,7 @@
 package dh.backend.clinicamvc.controller;
 
 import dh.backend.clinicamvc.entity.Odontologo;
+import dh.backend.clinicamvc.exception.BadRequestException;
 import dh.backend.clinicamvc.exception.ResourceNotFoundException;
 import dh.backend.clinicamvc.service.impl.OdontologoService;
 import org.springframework.http.HttpStatus;
@@ -25,7 +26,7 @@ public class OdontologoController {
     // ENDPOINTS
     // Crear un Odontólogo
     @PostMapping
-    public ResponseEntity<Odontologo> registrarOdontologo (@RequestBody Odontologo odontologo){
+    public ResponseEntity<Odontologo> registrarOdontologo (@RequestBody Odontologo odontologo) throws BadRequestException {
         return ResponseEntity.status(HttpStatus.CREATED).body(odontologoService.registrarOdontologo(odontologo));
     }
     // Obtener odontólogo por Id

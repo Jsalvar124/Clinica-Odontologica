@@ -27,7 +27,7 @@ public class TurnoServiceTest {
     void setUp(){
         turnoRequestDto = new TurnoRequestDto();
         turnoRequestDto.setPaciente_id(1);
-        turnoRequestDto.setOdontologo_id(3);
+        turnoRequestDto.setOdontologo_id(15);
         turnoRequestDto.setFecha("2024-05-11");
     }
 

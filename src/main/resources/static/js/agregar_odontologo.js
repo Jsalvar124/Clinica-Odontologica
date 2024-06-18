@@ -18,8 +18,8 @@ form.addEventListener("submit", function (event) {
     })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
-            alert("Odontólogo agregado con éxito");
+            console.log(data.message);
+            alert(data.message);
             form.reset(); // Resetear el formulario
         })
         .catch((error) => {

@@ -39,7 +39,7 @@ public class PacienteService implements IPacienteService {
     public Optional<Paciente> buscarPacientePorId(Integer id) throws BadRequestException {
         Optional<Paciente> optionalPaciente = pacienteRepository.findById(id);
         if (optionalPaciente.isPresent()){
-            LOGGER.info("Paciente encontrado " + optionalPaciente.get());
+            LOGGER.info("Paciente encontrado ");
         return optionalPaciente;
     }else{
             LOGGER.error("paciente no encontrado");
