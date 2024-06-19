@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dental Clinic</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/ajustes.css">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-primary" data-bs-theme="dark">
+    <div class="container-fluid">
+
+        <a class="navbar-brand" href="#"><img src="recursos/android-chrome-192x192.png" alt="" height="40px" width="40px"></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" href="index.html">Dental Clinic
+                        <span class="visually-hidden">(current)</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Turnos</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Pacientes</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="agregar_paciente.html">Agregar paciente</a>
+                        <a class="dropdown-item" href="listar_paciente.html">Listar paciente</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Odontologos</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="agregar_odontologo.html">Agregar odontologo</a>
+                        <a class="dropdown-item" href="listar_odontologo.html">Listar odontologo</a>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </div>
+</nav>
+
+<div class="container-xl">
+    <h1 class="mt-5">Pacientes</h1>
+    <table class="table table-hover" id="odontologosTable">
+        <thead>
+        <tr class="table-active">
+            <th scope="col">Orden</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+            <th scope="col">DNI</th>
+            <th scope="col">Fecha Ingreso</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+    <div class="container">
+        <h1 class="mt-5">Modificar Paciente</h1>
+        <form id="agregarForm">
+            <div class="mb-3">
+                <label class="form-label mt-4" >Nombre</label>
+                <input class="form-control" id="nombre" type="text" placeholder="Ingrese nombre" >
+            </div>
+            <div class="mb-3">
+                <label class="form-label mt-4" >Apellido</label>
+                <input class="form-control" id="apellido" type="text" placeholder="Ingrese apellido" >
+            </div>
+            <div class="mb-3">
+                <label class="form-label mt-4">DNI</label>
+                <input class="form-control" id="dni" type="text" placeholder="Ingrese dni" >
+            </div>
+            <div class="mb-3">
+                <label class="form-label mt-4">Fecha Ingreso</label>
+                <input class="form-control" id="fechaIngreso" type="date" placeholder="Ingrese fecha" >
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h3 class="card-title">Domicilio</h3>
+                    <div class="mb-3">
+                        <label class="form-label mt-2">Calle</label>
+                        <input class="form-control" id="calle" type="text" placeholder="Ingrese calle">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label mt-2">Número</label>
+                        <input class="form-control" id="numero" type="text" placeholder="Ingrese número">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label mt-2">Localidad</label>
+                        <input class="form-control" id="localidad" type="text" placeholder="Ingrese localidad">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label mt-2">Provincia</label>
+                        <input class="form-control" id="provincia" type="text" placeholder="Ingrese provincia">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
+<script src="js/listar_paciente.js"></script>
+</body>
+</html>
