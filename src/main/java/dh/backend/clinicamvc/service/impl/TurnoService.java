@@ -14,6 +14,8 @@ import dh.backend.clinicamvc.repository.IPacienteRepository;
 import dh.backend.clinicamvc.repository.ITurnoRepository;
 import dh.backend.clinicamvc.service.ITurnoService;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -24,6 +26,7 @@ import java.util.Optional;
 @Service
 public class TurnoService  implements ITurnoService {
 
+    private static Logger LOGGER = LoggerFactory.getLogger(PacienteService.class);
     private IOdontologoRepository odontologoRepository;
     private IPacienteRepository pacienteRepository;
     private ITurnoRepository turnoRepository;
@@ -56,8 +59,10 @@ public class TurnoService  implements ITurnoService {
             turnoGuardado = turnoRepository.save(turnoARegistrar);
             turnoADevolver = mapToResponseDto(turnoGuardado);
         }else{
+            LOGGER.error("turno no se pudo crear");
             throw new BadRequestException("{\"message\": \"no se pudo crear el turno\"}");
         }
+        LOGGER.info("Turno creado " + turnoADevolver);
         return turnoADevolver;
     }
 
@@ -67,8 +72,10 @@ public class TurnoService  implements ITurnoService {
         if (turnoOptional.isPresent()){
             Turno turnoEncontrado = turnoOptional.get();
             TurnoResponseDto turnoADevolver = mapToResponseDto(turnoEncontrado);
+            LOGGER.info("Turno encontrado " + turnoADevolver);
             return turnoADevolver;
         }
+        LOGGER.error("Turno no se pudo encontrar");
         return null;
     }
 
@@ -81,6 +88,7 @@ public class TurnoService  implements ITurnoService {
             turnoAuxiliar = mapToResponseDto(turno);
             turnosADevolver.add(turnoAuxiliar);
         }
+        LOGGER.info("listando turnos");
         return turnosADevolver;
     }
 
@@ -96,6 +104,7 @@ public class TurnoService  implements ITurnoService {
             turnoAModificar.setOdontologo(odontologo.get());
             turnoAModificar.setPaciente(paciente.get());
             turnoAModificar.setFecha(LocalDate.parse(turnoRequestDto.getFecha()));
+            LOGGER.info("Turno actualizado");
             turnoRepository.save(turnoAModificar);
         }
     }
@@ -104,9 +113,12 @@ public class TurnoService  implements ITurnoService {
     public void eliminarTurno(Integer id) throws ResourceNotFoundException {
         Optional<Turno> optionalTurno = turnoRepository.findById(id);
         if (optionalTurno.isPresent()){
+            LOGGER.info("Turno actualizado " + optionalTurno.get());
             turnoRepository.deleteById(id);
-        }else
+        }else {
+            LOGGER.error("paciente no se pudo turno");
             throw new ResourceNotFoundException("{\"message\": \"No se encontro id del turno\"}");
+        }
     }
 
     @Override
@@ -118,6 +130,7 @@ public class TurnoService  implements ITurnoService {
             turnoAuxiliar = mapToResponseDto(turno);
             listadoARetornar.add(turnoAuxiliar);
         }
+        LOGGER.info("turno encontrado");
         return listadoARetornar;
     }
 
